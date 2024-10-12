@@ -1,0 +1,42 @@
+CREATE DATABASE BDSeleccionFut
+
+CREATE TABLE usuario (
+    idusu INT AUTO_INCREMENT NOT NULL,
+    codigo VARCHAR(75) NULL,
+    email VARCHAR(150) NULL,
+    password VARCHAR(70) NULL,
+    activo BOOL NULL,
+    CONSTRAINT users_pk PRIMARY KEY (idusu)
+);
+
+
+CREATE TABLE rol (
+    idrol INT AUTO_INCREMENT NOT NULL,
+    rolusu VARCHAR(120) NULL,
+    CONSTRAINT roles_pk PRIMARY KEY (idrol)
+);
+
+
+CREATE TABLE rol_de_usuarios (
+    idusu INT NOT NULL,
+    idrol INT NOT NULL,
+    CONSTRAINT user_role_pk PRIMARY KEY (idusu, idrol),
+    CONSTRAINT user_role_FK FOREIGN KEY (idusu) REFERENCES usuario(idusu),
+    CONSTRAINT user_role_FK_1 FOREIGN KEY (idrol) REFERENCES rol(idrol)
+);
+
+---
+INSERT INTO usuario (codigo, email, password, activo) 
+VALUES 
+  (messi, 'messi10@gmail.com', '$2a$10$hQ8.n1zNz.P8E/D11wlOeOUJxa3HytEEVgGz4TkxwmjDL696uRT56', 1
+  (ronadinho, 'dinho@gmail.com', '$2a$10$A8ah.ACvDYvRBDBiiKp6xuW7NKXnV/cqck1XDoyeCXUk0p5xbwswq', 1
+---
+INSERT INTO rol (rolusu) 
+VALUES 
+  ('gestor'), 
+  ('coordinador');
+---
+INSERT INTO rol_de_usuarios (idusu, idrol) 
+VALUES 
+  (1, 1),  -- Usuario 1 con el rol de GESTOR
+  (2, 2);  -- Usuario 2 con el rol de COORDINADOR
